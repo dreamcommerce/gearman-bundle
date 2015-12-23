@@ -20,6 +20,7 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## 0.1.3
 - added support for memory-leak protection
+- fixed autoloader
 
 ## 0.1.2
 - first working version
