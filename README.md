@@ -15,3 +15,11 @@ new Mmoreram\GearmanBundle\GearmanBundle(),
 new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(), 
 ```
 3. That's all.
+
+## Changelog
+
+## 0.1.3
+- added support for memory-leak protection
+
+## 0.1.2
+- first working version

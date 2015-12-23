@@ -14,6 +14,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class GearmanExecute extends \Mmoreram\GearmanBundle\Service\GearmanExecute
 {
 
+    // keep 16 MiB free, regardless of latest heavy task amount
+    const RESERVED_MEMORY_AMOUNT = 16777216;
+
     /**
      * @var ContainerInterface
      */
@@ -143,6 +146,8 @@ class GearmanExecute extends \Mmoreram\GearmanBundle\Service\GearmanExecute
          */
         $alive = (0 == $iterations);
 
+        $maxTaskMemoryUsage = 0;
+
         /**
          * Executes GearmanWorker with all jobs defined
          */
@@ -162,6 +167,16 @@ class GearmanExecute extends \Mmoreram\GearmanBundle\Service\GearmanExecute
             $event = new GearmanWorkExecutedEvent($jobs, $iterations, $returnCode);
             $this->eventDispatcher->dispatch(GearmanEvents::GEARMAN_WORK_EXECUTED, $event);
 
+            $memoryUsage = memory_get_usage(true);
+
+            if($memoryUsage>$maxTaskMemoryUsage){
+                $maxTaskMemoryUsage = $memoryUsage;
+            }
+
+            if($this->isMemoryExhausted($maxTaskMemoryUsage)){
+                break;
+            }
+
             /**
              * Only finishes its execution if alive is false and iterations
              * arrives to 0
@@ -172,6 +187,37 @@ class GearmanExecute extends \Mmoreram\GearmanBundle\Service\GearmanExecute
         }
 
 
+    }
+
+    /**
+     * prevents breaking tasks when memory limit grows up too much
+     * @param integer $maxTaskMemoryUsage
+     * @return bool
+     */
+    protected function isMemoryExhausted($maxTaskMemoryUsage){
+        static $memory;
+        if(!$memory){
+            // http://stackoverflow.com/a/10209530
+            $memory = ini_get('memory_limit');
+            if (preg_match('/^(\d+)(.)$/', $memory, $matches)) {
+                if ($matches[2] == 'M') {
+                    $memory = $matches[1] * 1024 * 1024; // nnnM -> nnn MB
+                } else if ($matches[2] == 'K') {
+                    $memory = $matches[1] * 1024; // nnnK -> nnn KB
+                }
+            }
+        }
+
+        // examine diff between tasks
+        $currentMemory = memory_get_usage(true);
+        $diff = abs($maxTaskMemoryUsage-$currentMemory);
+
+        // if difference exceeds limit
+        if($currentMemory+$diff>($memory-self::RESERVED_MEMORY_AMOUNT)){
+            return true;
+        }
+
+        return false;
     }
 
     /**
