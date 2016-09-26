@@ -20,6 +20,13 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('dream_commerce_gearman');
 
+        $rootNode
+            ->children()
+            ->scalarNode('php_path')->defaultValue('/usr/local/bin/php')->end()
+            ->scalarNode('default_workers')->defaultValue(3)->end()
+            ->arrayNode('workers')->prototype('scalar')->end()->end()
+            ->end();
+
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.

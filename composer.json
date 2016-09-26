@@ -3,12 +3,12 @@
     "description": "A wrapper on mmoreram/gearman modifying logic to add support for signals.",
     "require": {
         "mmoreram/gearman-bundle": "~4.0",
-        "php": ">=5.4.0"
+        "francodacosta/supervisord": "~1.0"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "DreamCommerce\\GearmanBundle\\": ""
+            "DreamCommerce\\GearmanBundle\\": "src/DreamCommerce/GearmanBundle"
         }
     },
     "authors": [

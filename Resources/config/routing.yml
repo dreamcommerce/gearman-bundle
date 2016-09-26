@@ -1,3 +1,0 @@
-dream_commerce_gearman_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: DreamCommerceGearmanBundle:Default:index }
