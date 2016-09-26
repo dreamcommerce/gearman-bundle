@@ -2,13 +2,13 @@
     "name": "dreamcommerce/gearman-bundle",
     "description": "A wrapper on mmoreram/gearman modifying logic to add support for signals.",
     "require": {
-        "mmoreram/gearman-bundle": "~3.0",
+        "mmoreram/gearman-bundle": "~4.0",
         "php": ">=5.4.0"
     },
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "DreamCommerce\\GearmanBundle\\": "src/DreamCommerce/GearmanBundle"
+            "DreamCommerce\\GearmanBundle\\": ""
         }
     },
     "authors": [
@@ -16,6 +16,5 @@
             "name": "Przemysław Pawliczuk",
             "email": "przemyslaw.pawliczuk@shoper.pl"
         }
-    ],
-    "version": "0.1.2"
+    ]
 }
