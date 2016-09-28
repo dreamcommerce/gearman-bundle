@@ -27,7 +27,7 @@ class GenerateWorkersConfigCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        ////////// todo: get workers list
+        // todo: dreamcommerce bundle config off app/config.yml
         /////// consumers bundle?
         $client = $this->getContainer()->get('gearman');
         $workers = $client->getWorkers();
