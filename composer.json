@@ -2,7 +2,7 @@
     "name": "dreamcommerce/gearman-bundle",
     "description": "A wrapper on mmoreram/gearman modifying logic to add support for signals.",
     "require": {
-        "mmoreram/gearman-bundle": "dev-master",
+        "mmoreram/gearman-bundle": "@dev-master",
         "francodacosta/supervisord": "~1.0"
     },
     "license": "MIT",
