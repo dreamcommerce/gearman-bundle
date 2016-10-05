@@ -18,6 +18,14 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0
+- fix for PHP 7 in related commit of ``mmoreram/gearman-bundle``; removed obsolete logic
+- added a possibility to generate workers configuration for supervisord 
+
+## 0.1.4
+- cleaned-up version constraint
+- bound ``mmoreram/gearman-bundle`` to exact version constraint due to the segfault in PHP 7
+
 ## 0.1.3
 - added support for memory-leak protection
 - fixed autoloader
