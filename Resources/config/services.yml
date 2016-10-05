@@ -1,5 +1,5 @@
 parameters:
-    gearman.execute.class: DreamCommerce\GearmanBundle\Service\GearmanExecute
+
 
 services:
 #    dream_commerce_gearman.example:
