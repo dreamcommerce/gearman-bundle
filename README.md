@@ -18,6 +18,9 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0.1
+- fixed version constraint stability
+
 ## 1.0
 - fix for PHP 7 in related commit of ``mmoreram/gearman-bundle``; removed obsolete logic
 - added a possibility to generate workers configuration for supervisord 
