@@ -18,6 +18,25 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0.3
+- finished messing up with repositories locations, until pull request of ``mmoreram/gearman-bundle`` is being accepted, you have to declare a overriding repository in your main ``composer.json``
+```
+"repositories": [
+    {
+        "type": "package",
+        "package": {
+            "name": "mmoreram/gearman-bundle",
+            "version": "4.0",
+            "source": {
+                "url": "https://github.com/er1z/GearmanBundle",
+                "type": "git",
+                "reference": "master"
+            }
+        }
+    }
+],
+```
+
 ## 1.0.2
 - fixed autoloader definition
 
