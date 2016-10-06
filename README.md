@@ -18,6 +18,9 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0.2
+- fixed autoloader definition
+
 ## 1.0.1
 - fixed version constraint stability
 
