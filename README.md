@@ -18,6 +18,9 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0.4
+- fixed incorrect generated command
+
 ## 1.0.3
 - finished messing up with repositories locations, until pull request of ``mmoreram/gearman-bundle`` is being accepted, you have to declare a overriding repository in your main ``composer.json``
 ```
