@@ -18,6 +18,9 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0.5
+- fixed an issue with generating file with not configured workers
+
 ## 1.0.4
 - fixed incorrect generated command
 

@@ -34,13 +34,20 @@ class GenerateWorkersConfigCommand extends ContainerAwareCommand
 
         $phpPath = $this->getContainer()->getParameter('dream_commerce_gearman.config')['php_path'];
 
+        $workersConfig = $this->getContainer()->getParameter('dream_commerce_gearman.config')['workers'];
+
         foreach($workers as $w){
             foreach($w['jobs'] as $x) {
                 $directory = realpath($this->getContainer()->getParameter('kernel.root_dir').'/../');
                 $command = sprintf('%s bin/console gearman:job:execute %s -n --env=prod', $phpPath, $x['realCallableName']);
 
+                // worker not configured
+                if(!isset($workersConfig[$x['realCallableName']])){
+                    continue;
+                }
+
                 $numProcs =
-                    $this->getContainer()->getParameter('dream_commerce_gearman.config')['workers'][$x['realCallableName']] ?: 3;
+                    $workersConfig[$x['realCallableName']] ?: 3;
 
                 if(!$numProcs){
                     continue;
