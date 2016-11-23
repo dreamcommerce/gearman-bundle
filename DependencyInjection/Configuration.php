@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->scalarNode('php_path')->defaultValue('/usr/local/bin/php')->end()
             ->scalarNode('default_workers')->defaultValue(3)->end()
+            ->scalarNode('name_prefix')->defaultValue('')->end()
             ->arrayNode('workers')->prototype('scalar')->end()->end()
             ->end();
 

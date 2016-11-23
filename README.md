@@ -18,6 +18,10 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0.6
+- added ``name_prefix`` to specify task name prefix (useful when single Supervisor is shared between prod/dev)
+- fixed generating when no programs is defined
+
 ## 1.0.5
 - fixed an issue with generating file with not configured workers
 

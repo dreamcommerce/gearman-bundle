@@ -36,6 +36,8 @@ class GenerateWorkersConfigCommand extends ContainerAwareCommand
 
         $workersConfig = $this->getContainer()->getParameter('dream_commerce_gearman.config')['workers'];
 
+        $prefix = $this->getContainer()->getParameter('dream_commerce_gearman.config')['name_prefix'];
+
         foreach($workers as $w){
             foreach($w['jobs'] as $x) {
                 $directory = realpath($this->getContainer()->getParameter('kernel.root_dir').'/../');
@@ -53,8 +55,10 @@ class GenerateWorkersConfigCommand extends ContainerAwareCommand
                     continue;
                 }
 
+                $name = !$prefix ? $x['realCallableName'] : sprintf('%s_%s', $prefix, $x['realCallableName']);
+
                 $results['programs'][] = [
-                    'name'=>$x['realCallableName'],
+                    'name'=>$name,
                     'directory'=>$directory,
                     'command'=> $command,
                     'process_name'=>'%(program_name)s_%(process_num)02d',
@@ -65,19 +69,21 @@ class GenerateWorkersConfigCommand extends ContainerAwareCommand
             }
         }
 
-        $cfg = new Configuration();
-        $cfg->registerProcessor(
-            new CommandConfigurationProcessor()
-        );
-        $loader = new ArrayLoader();
-        $loader->setSource($results);
-        $loader->setConfiguration(
-            $cfg
-        );
+        if($results['programs']) {
+            $cfg = new Configuration();
+            $cfg->registerProcessor(
+                new CommandConfigurationProcessor()
+            );
+            $loader = new ArrayLoader();
+            $loader->setSource($results);
+            $loader->setConfiguration(
+                $cfg
+            );
 
-        $gen = $loader->load();
+            $gen = $loader->load();
 
-        $output->writeln($gen->generate());
+            $output->writeln($gen->generate());
+        }
 
     }
 }
