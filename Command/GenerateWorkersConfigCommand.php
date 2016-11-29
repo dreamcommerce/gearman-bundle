@@ -41,21 +41,21 @@ class GenerateWorkersConfigCommand extends ContainerAwareCommand
         foreach($workers as $w){
             foreach($w['jobs'] as $x) {
                 $directory = realpath($this->getContainer()->getParameter('kernel.root_dir').'/../');
-                $command = sprintf('%s bin/console gearman:job:execute %s -n --env=prod', $phpPath, $x['realCallableName']);
+                $command = sprintf('%s bin/console gearman:job:execute %s -n --env=prod', $phpPath, $x['realCallableNameNoPrefix']);
 
                 // worker not configured
-                if(!isset($workersConfig[$x['realCallableName']])){
+                if(!isset($workersConfig[$x['realCallableNameNoPrefix']])){
                     continue;
                 }
 
                 $numProcs =
-                    $workersConfig[$x['realCallableName']] ?: 3;
+                    $workersConfig[$x['realCallableNameNoPrefix']] ?: 3;
 
                 if(!$numProcs){
                     continue;
                 }
 
-                $name = !$prefix ? $x['realCallableName'] : sprintf('%s_%s', $prefix, $x['realCallableName']);
+                $name = !$prefix ? $x['realCallableNameNoPrefix'] : sprintf('%s_%s', $prefix, $x['realCallableNameNoPrefix']);
 
                 $results['programs'][] = [
                     'name'=>$name,
