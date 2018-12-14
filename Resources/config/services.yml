@@ -2,6 +2,7 @@ parameters:
 
 
 services:
-#    dream_commerce_gearman.example:
-#        class: DreamCommerce\GearmanBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    gearman.command.generate_workers_config:
+        class: DreamCommerce\GearmanBundle\Command\GenerateWorkersConfigCommand
+        tags:
+            - { name: console.command }
