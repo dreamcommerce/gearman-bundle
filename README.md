@@ -18,6 +18,9 @@ new DreamCommerce\GearmanBundle\DreamCommerceGearmanBundle(),
 
 ## Changelog
 
+## 1.0.8
+- register command as service
+
 ## 1.0.7
 - fixed configuration generating when job_prefix is used
 
